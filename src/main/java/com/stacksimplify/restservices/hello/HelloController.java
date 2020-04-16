@@ -20,6 +20,7 @@ public class HelloController {
 		return "Hello World";
 	}
 	
+	//user details 
 	@GetMapping("/helloworldbean")
 	public UserDetails helloWorldBean()
 	{
