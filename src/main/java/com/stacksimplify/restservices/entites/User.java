@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 //Entity - Entity is nothing but is POJOs representing data that can be persisted to the database
 //Entity table store in a database, default name is as a same with class name.
@@ -19,9 +21,11 @@ public class User {
 	@GeneratedValue
 	private Long id;
 	
+	@NotEmpty(message = "Username is Mandatory field. Please provide username.")
 	@Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
 	private String username;
 	
+	@Size(min = 2, message = "Firstname should have atleast 2 characters")
 	@Column(name = "FIRST_NAME", length = 50, nullable = false)
 	private String firstname;
 	

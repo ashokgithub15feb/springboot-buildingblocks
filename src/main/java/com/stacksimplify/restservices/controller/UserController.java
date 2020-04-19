@@ -3,10 +3,14 @@ package com.stacksimplify.restservices.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +24,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.stacksimplify.restservices.entites.User;
 import com.stacksimplify.restservices.exception.UserExistsException;
 import com.stacksimplify.restservices.exception.UserNotFoundException;
+import com.stacksimplify.restservices.exception.UsernameNotFoundException;
 import com.stacksimplify.restservices.services.UserService;
 
 @RestController
+@Validated
 public class UserController {
 
 	@Autowired
@@ -38,7 +44,7 @@ public class UserController {
 	//@Request Body
 	//@Post Mapping
 	@PostMapping("/users") //
-	public ResponseEntity<Void> createuser(@RequestBody User user, UriComponentsBuilder builder)
+	public ResponseEntity<Void> createuser(@Valid @RequestBody User user, UriComponentsBuilder builder)
 	{
 		try 
 		{
@@ -57,7 +63,7 @@ public class UserController {
 	//Get user By id
 	//Get mapping
 	@GetMapping("/users/{id}")
-	public Optional<User> getUserById(@PathVariable("id") Long id )
+	public Optional<User> getUserById(@PathVariable("id") @Min(1) Long id )
 	{
 		try
 		{
@@ -92,8 +98,15 @@ public class UserController {
 	
 	
 	@GetMapping("/users/byusername/{username}")
-	public User getUserByUsername(@PathVariable("username") String username)
+	public User getUserByUsername(@PathVariable("username") String username) throws UsernameNotFoundException
 	{
-		return userService.getUserByUsername(username);
+		User userByUsername = userService.getUserByUsername(username);
+		
+		if(userByUsername == null)
+		{
+			throw new UsernameNotFoundException("Username: "+username+" not found is repository");
+		}
+		
+		return userByUsername;
 	}
 }
