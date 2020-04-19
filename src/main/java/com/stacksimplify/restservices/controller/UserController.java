@@ -27,6 +27,8 @@ import com.stacksimplify.restservices.exception.UserNotFoundException;
 import com.stacksimplify.restservices.exception.UsernameNotFoundException;
 import com.stacksimplify.restservices.services.UserService;
 
+//Controller class
+
 @RestController
 @Validated
 public class UserController {

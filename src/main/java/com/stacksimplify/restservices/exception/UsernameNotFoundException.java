@@ -1,5 +1,6 @@
 package com.stacksimplify.restservices.exception;
 
+//added new custom exception class
 public class UsernameNotFoundException extends Exception{
 
 	/**

@@ -2,7 +2,7 @@ package com.stacksimplify.restservices.exception;
 
 import java.util.Date;
 
-//Simple Custom Error Bean
+//Simple Custom Error Bean class
 public class CustomErrorDetails {
 
 	private Date timestamp;

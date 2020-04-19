@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 //Entity table store in a database, default name is as a same with class name.
 //@Entity(name = "users")
 
-
+//added validated part
 @Entity
 @Table
 public class User {
