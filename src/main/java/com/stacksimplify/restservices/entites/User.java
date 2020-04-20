@@ -11,6 +11,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.hateoas.RepresentationModel;
+
+
 //Entity - Entity is nothing but is POJOs representing data that can be persisted to the database
 //Entity table store in a database, default name is as a same with class name.
 //@Entity(name = "users")
@@ -18,7 +21,8 @@ import javax.validation.constraints.Size;
 //added validated part
 @Entity
 @Table
-public class User {
+public class User extends RepresentationModel<User>
+{
 	
 	@Id
 	@GeneratedValue
@@ -129,6 +133,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
+				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + ", orders=" + orders + "]";
 	}
+
+	
 }
