@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,7 +25,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //added validated part
 @Entity
 @Table
-@JsonIgnoreProperties({"firstname", "lastname"})
+//@JsonIgnoreProperties({"firstname", "lastname"}) // - Static Filtering JsonIgnore
+@JsonFilter(value = "userFilter")
 public class User extends RepresentationModel<User> // RepresentationModel for HATEOAS
 {
 	
@@ -50,7 +52,7 @@ public class User extends RepresentationModel<User> // RepresentationModel for H
 	private String role;
 	
 	@Column(name = "SSN", length = 50, nullable = false, unique = true) //nullable = true, JsonIgnore case
-	@JsonIgnore
+	//@JsonIgnore // - Static Filtering JsonIgnore
 	private String ssn;
 	
 	@OneToMany(mappedBy = "user")
