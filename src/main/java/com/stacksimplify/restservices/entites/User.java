@@ -13,6 +13,9 @@ import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 //Entity - Entity is nothing but is POJOs representing data that can be persisted to the database
 //Entity table store in a database, default name is as a same with class name.
@@ -21,7 +24,8 @@ import org.springframework.hateoas.RepresentationModel;
 //added validated part
 @Entity
 @Table
-public class User extends RepresentationModel<User>
+@JsonIgnoreProperties({"firstname", "lastname"})
+public class User extends RepresentationModel<User> // RepresentationModel for HATEOAS
 {
 	
 	@Id
@@ -45,7 +49,8 @@ public class User extends RepresentationModel<User>
 	@Column(name = "ROLE", length = 50, nullable = false)
 	private String role;
 	
-	@Column(name = "SSN", length = 50, nullable = false, unique = true)
+	@Column(name = "SSN", length = 50, nullable = false, unique = true) //nullable = true, JsonIgnore case
+	@JsonIgnore
 	private String ssn;
 	
 	@OneToMany(mappedBy = "user")
