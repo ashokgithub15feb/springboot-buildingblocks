@@ -23,7 +23,7 @@ public class UserMapStructContoller {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
+	//@Autowired
 	private UserMapper userMapper;
 	
 	@GetMapping
